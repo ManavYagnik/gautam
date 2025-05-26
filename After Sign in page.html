@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order & Payment - Industrial Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      background-color: #232f3e;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+      color: #333;
+    }
+
+    .order-summary {
+      margin-bottom: 30px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+
+    .place-order-btn {
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .payment-section {
+      display: none;
+    }
+
+    .payment-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .payment-option {
+      flex: 1 1 200px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .payment-option:hover {
+      border-color: #232f3e;
+      background-color: #f9f9f9;
+    }
+
+    .payment-option img {
+      height: 30px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .footer {
+      background-color: #232f3e;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .footer-links h4 {
+      margin-bottom: 10px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li a {
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid #444;
+      padding-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <a href="Industrial Ecommerce Buyer Page.html">
+        <img src="white-logo.png" alt="Logo">
+      </a>
+    </div>
+    <nav>
+      <a href="Industrial Ecommerce Buyer Page.html">Home</a>
+      <a href="#">Orders</a>
+      <a href="#">Account</a>
+      <a href="#">Cart</a>
+      <a href="industrial-deals.html">Deals</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h2>Order Details</h2>
+    <div class="order-summary">
+      <div class="summary-item"><strong>Product:</strong> Makita Angle Grinder 100mm</div>
+      <div class="summary-item"><strong>Quantity:</strong> 1</div>
+      <div class="summary-item"><strong>Total Price:</strong> ₹3,499</div>
+      <div class="summary-item"><strong>Delivery Charges:</strong> ₹100</div>
+      <div class="summary-item"><strong>Final Amount:</strong> <strong>₹3,599</strong></div>
+    </div>
+
+    <button class="place-order-btn" onclick="showPaymentOptions()">Place Order & Pay</button>
+
+    <div class="payment-section" id="paymentSection">
+      <h2>Choose Payment Method</h2>
+      <div class="payment-options">
+        <div class="payment-option">
+          <img src="card-icon.png" alt="Card"> Credit / Debit Card
+        </div>
+        <div class="payment-option">
+          <img src="upi-icon.png" alt="UPI"> UPI (Google Pay / PhonePe / BHIM)
+        </div>
+        <div class="payment-option">
+          <img src="wallet-icon.png" alt="Wallet"> Digital Wallets (Paytm, Mobikwik)
+        </div>
+	<div class="payment-option" onclick="goToCODConfirmation()" style="cursor: pointer;">
+  <img src="cod-icon.png" alt="COD"> Cash on Delivery (COD)
+	</div>
+        <div class="payment-option">
+          <img src="netbanking-icon.png" alt="Net Banking"> Net Banking
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <div>
+        <h4>Get to Know Us</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Releases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect with Us</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Let Us Help You</h4>
+        <ul>
+          <li><a href="#">Your Orders</a></li>
+          <li><a href="#">Returns Centre</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+
+  <!-- JavaScript -->
+<script>
+  function showPaymentOptions() {
+    document.getElementById('paymentSection').style.display = 'block';
+    window.scrollTo({
+      top: document.getElementById('paymentSection').offsetTop,
+      behavior: 'smooth'
+    });
+  }
+
+  function goToCODConfirmation() {
+    window.location.href = 'Order Confirmation Page.html';
+  }
+</script>
+
+
+</body>
+</html>

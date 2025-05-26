@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 15px 30px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo img {
+  height: 45px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: rotate(-5deg) scale(1.1);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.3s ease;
+}
+
+nav a:first-child {
+  margin-left: 0;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #f0c14b
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: #f0c14b;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    padding: 15px 20px;
+  }
+
+  nav {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a {
+    margin: 8px 12px;
+  }
+}
+
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .cart-summary {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .pay-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      background-color: #f0c14b;
+      color: BLACK;
+      border: none;
+      border-radius: 5px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .pay-button:hover {
+      background-color: #f0c14b;
+    }
+
+#paymentSection {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 480px;
+  margin: 20px auto 0;
+  padding: 20px 25px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#paymentSection h2 {
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.payment-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.payment-option {
+  flex: 1 1 40%;
+  display: flex;
+  align-items: center;
+  background: #f7f7f7;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+.payment-option img {
+  width: 28px;
+  height: 28px;
+  margin-right: 14px;
+  object-fit: contain;
+}
+
+.payment-option:hover {
+  background-color: #f0c14b;
+  color: black;
+  box-shadow: 0 4px 12px rgba(206, 216, 65, 0.6);
+}
+
+.payment-option:hover img {
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 480px) {
+  .payment-option {
+    flex: 1 1 100%;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">
+    <a href="index.HTML">
+      <img src="images/white-logo.png" alt="Logo" />
+    </a>
+  </div>
+  <nav>
+    <a href="index.HTML">Home</a>
+    <a href="#">Orders</a>
+    <a href="#">Account</a>
+    <a href="#">Cart</a>
+    <a href="industrial-deals.html">Deals</a>
+  </nav>
+</header>
+
+    
+  <h1>🧾 Order Summary & Payment</h1>
+  <div class="cart-summary" id="summaryContainer">
+    <!-- Items will be injected here -->
+  </div>
+
+<div id="paymentSection" style="display:none; margin-top: 20px;">
+  <h2>Choose Payment Method</h2>
+  <div class="payment-options">
+    <div class="payment-option" style="cursor:pointer;">
+      <img src="images/Card-icon.png" alt="Card" style="width:24px; margin-right:8px;"> Credit / Debit Card
+    </div>
+    <div class="payment-option" style="cursor:pointer;">
+      <img src="images/upi-icon.png" alt="UPI" style="width:24px; margin-right:8px;"> UPI (Google Pay / PhonePe / BHIM)
+    </div>
+    <div class="payment-option" style="cursor:pointer;">
+      <img src="images/Wallet-icon.png" alt="Wallet" style="width:24px; margin-right:8px;"> Digital Wallets (Paytm, Mobikwik)
+    </div>
+    <div class="payment-option" onclick="goToCODConfirmation()" style="cursor:pointer;">
+      <img src="images/cod-icon.png" alt="COD" style="width:24px; margin-right:8px;"> Cash on Delivery (COD)
+    </div>
+    <div class="payment-option" style="cursor:pointer;">
+      <img src="images/netbanking-icon.png" alt="Net Banking" style="width:24px; margin-right:8px;"> Net Banking
+    </div>
+  </div>
+</div>
+
+  <script>
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const summaryContainer = document.getElementById("summaryContainer");
+const paymentSection = document.getElementById("paymentSection");
+
+if (cart.length === 0) {
+  summaryContainer.innerHTML = "<p>Your cart is empty. Please add items before proceeding to payment.</p>";
+} else {
+  let total = 0;
+
+  cart.forEach(item => {
+    const price = parseFloat(item.price.replace("₹", "").replace(",", ""));
+    const qty = item.qty || 1;
+    const subtotal = price * qty;
+    total += subtotal;
+
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "item";
+    itemDiv.innerHTML = `
+      <div>
+        <strong>${item.title}</strong><br>
+        Qty: ${qty} × ₹${price.toFixed(2)}
+      </div>
+      <div>₹${subtotal.toFixed(2)}</div>
+    `;
+    summaryContainer.appendChild(itemDiv);
+  });
+
+  const totalDiv = document.createElement("div");
+  totalDiv.className = "total";
+  totalDiv.textContent = `Total: ₹${total.toFixed(2)}`;
+  summaryContainer.appendChild(totalDiv);
+
+  const payBtn = document.createElement("button");
+  payBtn.className = "pay-button";
+  payBtn.textContent = "Pay Now";
+  
+  payBtn.onclick = () => {
+    // Toggle payment section visibility on clicking Pay Now
+    if (paymentSection.style.display === "none") {
+      paymentSection.style.display = "block";
+      payBtn.textContent = "Hide Payment Options";
+    } else {
+      paymentSection.style.display = "none";
+      payBtn.textContent = "Pay Now";
+    }
+  };
+  
+  summaryContainer.appendChild(payBtn);
+}
+
+// COD function to handle COD selection
+function goToCODConfirmation(){
+  alert("You selected Cash on Delivery. Order placed successfully!");
+  localStorage.removeItem("cart");
+  window.location.href = "index.html"; // or your order confirmation page
+}
+
+  </script>
+</body>
+</html>

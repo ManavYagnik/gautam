@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Cart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #232f3e;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    .search-bar {
+      flex-grow: 1;
+      margin: 0 20px;
+      display: flex;
+    }
+
+    .search-bar input {
+      flex-grow: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-bar button {
+      padding: 8px 12px;
+      background-color: #febd69;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+
+
+    .cart-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #232f3e;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-right: 20px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-details h3 {
+      margin: 0 0 5px 0;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .quantity-controls button {
+      margin: 0 5px;
+      padding: 4px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .remove-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin-left: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .subtotal {
+      text-align: right;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 20px;
+      margin-top: 30px;
+    }
+
+    .confirm-button {
+      display: block;
+      margin-left: auto;
+      margin-top: 15px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .confirm-button:hover {
+      background-color: #005bb5;
+    }
+
+        .footer {
+      background-color: #232f3e;
+      color: white;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .footer-links h4 {
+      margin-bottom: 10px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li a {
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      border-top: 1px solid #444;
+      padding-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+ 
+   <header class="header">
+    <div class="logo">
+      <a href="index.HTML">
+        <img src="images/white-logo.png" alt="Logo">
+      </a>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search industrial deals...">
+      <button>Search</button>
+    </div>
+    <nav>
+      <a href="index.HTML" style="color:white; margin-right:15px;">Home</a>
+      <a href="Tools.Html" style="color:white; margin-right:15px;">Categories</a>
+      <a href="#" style="color:white; margin-right:15px;">Account</a>
+      <a href="industrial-deals.html" style="color:white;">Deals</a>
+    </nav>
+  </header>
+ 
+  <div class="cart-container">
+    <h1>🛒 Your Cart</h1>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="totalAmount"></div>
+    <button class="confirm-button" onclick="confirmAndPay()">Confirmation & Payment</button>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsContainer = document.getElementById("cartItems");
+    const totalAmountEl = document.getElementById("totalAmount");
+
+    function updateCartDisplay() {
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+        totalAmountEl.textContent = "";
+        document.querySelector('.confirm-button').style.display = "none";
+        return;
+      }
+
+      document.querySelector('.confirm-button').style.display = "block";
+
+      cart.forEach((item, index) => {
+        const basePrice = parseFloat(item.price.replace("₹", "").replace(",", ""));
+        const itemQty = item.qty || 1;
+        const itemTotal = basePrice * itemQty;
+        total += itemTotal;
+
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+
+        itemDiv.innerHTML = `
+          <img src="${item.imgSrc}" alt="${item.title}" />
+          <div class="cart-item-details">
+            <h3>${item.title}</h3>
+            <p>Price: ₹${basePrice.toFixed(2)}</p>
+            <div class="quantity-controls">
+              <button onclick="changeQty(${index}, -1)">−</button>
+              <span id="qty-${index}">${itemQty}</span>
+              <button onclick="changeQty(${index}, 1)">+</button>
+              <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            </div>
+          </div>
+          <div class="subtotal"><br> ₹<span id="subtotal-${index}">${itemTotal.toFixed(2)}</span></div>
+        `;
+
+        cartItemsContainer.appendChild(itemDiv);
+      });
+
+      totalAmountEl.textContent = `Total: ₹${total.toFixed(2)}`;
+    }
+
+    function changeQty(index, delta) {
+      const item = cart[index];
+      item.qty = (item.qty || 1) + delta;
+      if (item.qty <= 0) {
+        removeItem(index);
+      } else {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartDisplay();
+      }
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartDisplay();
+    }
+
+    function confirmAndPay() {
+  alert("Proceeding to payment... (You will now be redirected to sign in.)");
+  window.location.href = "Product sign Page.html"; // Redirect to your sign-in page
+}
+
+
+    updateCartDisplay();
+
+  document.getElementById("confirmBtn").addEventListener("click", function () {
+    // cartItems should already be in localStorage
+    window.location.href = "payment.html";
+  });
+
+  </script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <div>
+        <h4>Get to Know Us</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Releases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect with Us</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Let Us Help You</h4>
+        <ul>
+          <li><a href="#">Your Orders</a></li>
+          <li><a href="#">Returns Centre</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Industrial Market. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

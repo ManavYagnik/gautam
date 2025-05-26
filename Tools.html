@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tools.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <a href="index.HTML">
+        <img width="140" height="80" src="images/white-logo.png" alt="logo">
+      </a>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search industrial deals...">
+      <button>Search</button>
+    </div>
+    <nav class="nav">
+      <a href="index.HTML">Home</a>
+      <a href="#">Orders</a>
+      <a href="#">Account</a>
+      <a href="Cart.html">Cart</a>
+      <a href="industrial-deals.html">Deals</a>
+    </nav>
+  </header>
+
+  <!-- Deals Banner -->
+  <div class="deals-header">
+    🔥 Industrial Deals & Offers – Limited Time Only!
+  </div>
+
+  <!-- Main Section -->
+  <div class="main-container">
+    
+    <!-- Filter Sidebar -->
+<aside class="sidebar">
+  <h3>Filter By</h3>
+
+  <strong>Category</strong>
+  <label><input type="checkbox" name="category" value="cutting-tools"> Cutting Tools</label>
+  <label><input type="checkbox" name="category" value="measuring-tools"> Measuring Tools</label>
+  <label><input type="checkbox" name="category" value="safety"> Safety Equipment</label>
+  <label><input type="checkbox" name="category" value="lifting-tools"> Lifting Tools</label>
+  <label><input type="checkbox" name="category" value="power-tools"> Power Tools</label>
+  <label><input type="checkbox" name="category" value="compressors"> Compressors</label>
+  <label><input type="checkbox" name="category" value="cleaning-tools"> Cleaning Tools</label>
+  <label><input type="checkbox" name="category" value="fastening-tools"> Fastening Tools</label>
+  <label><input type="checkbox" name="category" value="material-handling"> Material Handling</label>
+  <label><input type="checkbox" name="category" value="welding-tools"> Welding Tools</label>
+
+  <br>
+  <strong>Price Range</strong>
+  <label><input type="checkbox" name="price" value="under-1000"> Under ₹1,000</label>
+  <label><input type="checkbox" name="price" value="1000-5000"> ₹1,000 - ₹5,000</label>
+  <label><input type="checkbox" name="price" value="5000-10000"> ₹5,000 - ₹10,000</label>
+
+  <br>
+  <strong>Brand</strong>
+  <label><input type="checkbox" name="brand" value="makita"> Makita</label>
+  <label><input type="checkbox" name="brand" value="stanley"> Stanley</label>
+  <label><input type="checkbox" name="brand" value="bosch"> Bosch</label>
+  <label><input type="checkbox" name="brand" value="3m"> 3M</label>
+  <label><input type="checkbox" name="brand" value="ingco"> Ingco</label>
+  <label><input type="checkbox" name="brand" value="dewalt"> Dewalt</label>
+  <label><input type="checkbox" name="brand" value="karcher"> Karcher</label>
+  <label><input type="checkbox" name="brand" value="taparia"> Taparia</label>
+  <label><input type="checkbox" name="brand" value="godrej"> Godrej</label>
+  <label><input type="checkbox" name="brand" value="esab"> ESAB</label>
+
+  <button onclick="applyFilters()">Apply Filter</button>
+  <button onclick="clearFilters()">Clear Filters</button>
+
+</aside>
+
+
+    <!-- Deals Products -->
+<section class="deals-grid" id="productGrid">
+
+     <div class="deal-card" data-category="cutting-tools" data-price="1000-5000" data-brand="makita">
+    <a href="#" onclick="viewProduct('Angle Grinder', 'angle-grinder.jpg', '₹4,200', '₹3,499')">
+  <img src="images/Angle-Grinder.jpg" alt="Angle Grinder">
+    </a>
+    <h3>Angle Grinder</h3>
+    <div class="old-price">₹4,200</div>
+    <div class="new-price">₹3,499</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="measuring-tools" data-price="under-1000" data-brand="stanley">
+    <img src="images/Measuring Tape (5m).jpg" alt="Measuring Tape">
+    <h3>Measuring Tape (5m)</h3>
+    <div class="old-price">₹650</div>
+    <div class="new-price">₹499</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="safety" data-price="1000-5000" data-brand="3m">
+    <img src="images/Safety Helmet with Face Shield.jpg" alt="Safety Helmet">
+    <h3>Safety Helmet with Face Shield</h3>
+    <div class="old-price">₹1,800</div>
+    <div class="new-price">₹1,299</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="lifting-tools" data-price="5000-10000" data-brand="ingco">
+    <img src="images/Chain Pulley Block (2 Ton).jpg" alt="Chain Pulley Block">
+    <h3>Chain Pulley Block (2 Ton)</h3>
+    <div class="old-price">₹9,000</div>
+    <div class="new-price">₹7,499</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="power-tools" data-price="1000-5000" data-brand="dewalt">
+    <img src="images/Electric Jigsaw.jpg" alt="Jigsaw Machine">
+    <h3>Electric Jigsaw</h3>
+    <div class="old-price">₹4,800</div>
+    <div class="new-price">₹3,799</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="compressors" data-price="5000-10000" data-brand="bosch">
+    <img src="images/Portable Air Compressor.jpg" alt="Air Compressor">
+    <h3>Portable Air Compressor</h3>
+    <div class="old-price">₹10,000</div>
+    <div class="new-price">₹8,499</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="cleaning-tools" data-price="1000-5000" data-brand="karcher">
+    <img src="images/High Pressure Washer.jpg" alt="Pressure Washer">
+    <h3>High Pressure Washer</h3>
+    <div class="old-price">₹6,500</div>
+    <div class="new-price">₹4,999</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="fastening-tools" data-price="under-1000" data-brand="taparia">
+    <img src="images/Screwdriver Set (6 pcs).jpg" alt="Screwdriver Set">
+    <h3>Screwdriver Set (6 pcs)</h3>
+    <div class="old-price">₹950</div>
+    <div class="new-price">₹749</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="material-handling" data-price="5000-10000" data-brand="godrej">
+    <img src="images/Heavy Duty Hand Trolley.jpg" alt="Hand Trolley">
+    <h3>Heavy Duty Hand Trolley</h3>
+    <div class="old-price">₹8,200</div>
+    <div class="new-price">₹6,999</div>
+    <button>Add to Cart</button>
+  </div>
+
+  <div class="deal-card" data-category="welding-tools" data-price="1000-5000" data-brand="esab">
+    <img src="images/Portable Welding Machine.jpg" alt="Welding Machine">
+    <h3>Portable Welding Machine</h3>
+    <div class="old-price">₹4,600</div>
+    <div class="new-price">₹3,999</div>
+    <button>Add to Cart</button>
+  </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <div>
+        <h4>Get to Know Us</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press Releases</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect with Us</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Let Us Help You</h4>
+        <ul>
+          <li><a href="#">Your Orders</a></li>
+          <li><a href="#">Returns Centre</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Industrial Market. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script src="js/tools.js"></script>
+
+
+</body>
+</html>
